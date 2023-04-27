@@ -4,8 +4,7 @@ const yargs = require('yargs');
 const argv = yargs.argv;
 
 const command = argv._[0];
-
-// Функція для отримання даних з файлу db.json
+// отримання даних
 const getRecords = () => {
   try {
     const dataBuffer = fs.readFileSync('db.json');
@@ -15,28 +14,24 @@ const getRecords = () => {
     return [];
   }
 };
-
-// Функція для збереження даних у файлі db.json
+// збереження
 const saveRecords = (records) => {
   const dataJSON = JSON.stringify(records);
   fs.writeFileSync('db.json', dataJSON);
 };
-
-// Функція для створення нового запису
+// створ. нового запис.
 const createRecord = (record) => {
   const records = getRecords();
   records.push(record);
   saveRecords(records);
   console.log('Запис успішно створено');
 };
-
-// Функція для читання даних з бази даних
+// читання
 const readRecords = () => {
   const records = getRecords();
   console.log(records);
 };
-
-// Функція для оновлення запису в базі даних
+// апдейт
 const updateRecord = (id, updatedRecord) => {
   const records = getRecords();
   const recordToUpdate = records.find((record) => record.id === id);
@@ -49,8 +44,7 @@ const updateRecord = (id, updatedRecord) => {
     console.log('Запис не знайдено');
   }
 };
-
-// Функція для видалення запису з бази даних
+// деліт
 const deleteRecord = (id) => {
   const records = getRecords();
   const updatedRecords = records.filter((record) => record.id !== id);
@@ -87,4 +81,5 @@ switch (command) {
     console.log('Невідома команда');
     }
     
+
     
